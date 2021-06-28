@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css - demo03 - 水平居中</title>
+    <style>
+      .container {
+        width: 400px;
+        height: 100px;
+        border: 1px solid #666;
+        border-radius: 4px;
+        margin: 20px;
+        padding: 20px;
+      }
+      .container .item {
+        border: 1px solid #999;
+      }
+
+      .container1 {
+        text-align: center;
+      }
+      .container2 .item {
+        width: 200px;
+        margin: auto;
+      }
+      .container3 {
+        position: relative;
+      }
+      .container3 .item {
+        width: 100px;
+        height: 40px;
+        position: relative;
+        left: calc(50% - 50px);
+        top: calc(50% - 20px);
+        /* left: 50%;
+        top: 50%;
+        margin-left: -50px;
+        margin-top: -20px; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container container1">
+      <span class="item">行内元素 - 水平居中</span>
+    </div>
+    <div class="container container2">
+      <div class="item item2">块级元素 - 水平居中</div>
+    </div>
+    <div class="container container3">
+      <div class="item">absolute元素 - 水平居中</div>
+    </div>
+  </body>
+</html>

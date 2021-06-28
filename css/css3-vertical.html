@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css - demo03 - 水平垂直居中</title>
+    <style>
+      .container {
+        width: 400px;
+        height: 100px;
+        border: 1px solid #666;
+        border-radius: 4px;
+        margin: 20px;
+        padding: 20px;
+      }
+      .container .item {
+        border: 1px solid #999;
+      }
+
+      .container1 {
+        line-height: 100px;
+        text-align: center;
+      }
+
+      .container2,
+      .container3,
+      .container4 {
+        position: relative;
+      }
+
+      .container2 .item,
+      .container3 .item,
+      .container4 .item {
+        width: 300px;
+        height: 60px;
+        background-color: #ccc;
+      }
+
+      .container2 .item {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -30px;
+      }
+      .container3 .item {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .container4 .item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container container1">
+      <span class="item">行内元素 - 垂直居中</span>
+    </div>
+    <div class="container container2">
+      <div class="item item2">absolute元素 - 垂直居中1</div>
+    </div>
+    <div class="container container3">
+      <div class="item">absolute元素 - 垂直居中2</div>
+    </div>
+    <div class="container container4">
+      <div class="item item2">absolute元素 - 垂直居中3</div>
+    </div>
+  </body>
+</html>
