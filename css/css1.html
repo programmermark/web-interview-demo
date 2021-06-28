@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css - demo01</title>
+    <style>
+      .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        border: 2px solid yellow;
+        width: 200px;
+        height: 200px;
+        padding: 20px;
+        margin: 20px;
+      }
+      .box > span {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <span> width: 200px; </span>
+      <span> height: 200px; </span>
+      <span> padding: 20px; </span>
+      <span> margin: 20px; </span>
+      <span> border-width: 2px; </span>
+    </div>
+
+    <div class="offsetWidth"></div>
+    <div class="clientWidth"></div>
+    <script>
+      const boxEle = document.querySelector(".box");
+      const offsetWidthEle = document.querySelector(".offsetWidth");
+      const clientWidth = document.querySelector(".clientWidth");
+      offsetWidthEle.textContent = `offsetWidth: ${boxEle.offsetWidth}`;
+      clientWidth.textContent = `clientWidth: ${boxEle.clientWidth}`;
+    </script>
+  </body>
+</html>

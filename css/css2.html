@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css - demo02 - BFC</title>
+    <style>
+      #container {
+        padding: 20px;
+      }
+      .logo {
+        width: 100px;
+        height: 32px;
+        float: left;
+      }
+      /** 触发bfc */
+      .bfc {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container" class="bfc">
+      <img
+        class="logo"
+        src="https://www.baidu.com/img/flexible/logo/pc/result.png"
+        alt="baidu logo"
+      />
+      <p class="bfc">
+        百度是拥有强大互联网基础的领先AI公司。百度愿景是：成为最懂用户，并能帮助人们成长的全球顶级高科技公司。
+      </p>
+    </div>
+  </body>
+</html>
