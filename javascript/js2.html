@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>深拷贝</title>
-</head>
-<body>
-  <pre>
-    <h3>typeof </h3>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手写深拷贝</title>
+  </head>
+  <body>
+    <script>
+      const obj1 = {
+        name: "张三",
+        age: 18,
+        run() {
+          console.log(`${this.name} run fast`);
+        },
+      };
 
-  </pre>
-</body>
+      const obj2 = deepClone(obj1);
+
+      console.log(obj2);
+
+      /**
+       * 深拷贝
+       * @params obj 要拷贝的对象
+       */
+      function deepClone(obj = {}) {
+        /** obj是null, 或者不是对象和数组，直接返回；对象和数组需要进一步拷贝对象的属性、数组的元素，通过递归实现 */
+        if (typeof obj !== "object" || obj == null) {
+          return obj;
+        }
+
+        // 初始化返回结果
+        let result;
+        if (obj instanceof Array) {
+          result = [];
+        } else {
+          result = {};
+        }
+
+        for (const key in obj) {
+          // 保证key不是从原型取得的属性
+          if (Object.hasOwnProperty.call(obj, key)) {
+            // 递归调用
+            result[key] = deepClone(obj[key]);
+          }
+        }
+
+        return result;
+      }
+    </script>
+  </body>
 </html>

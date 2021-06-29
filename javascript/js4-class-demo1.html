@@ -1,0 +1,17 @@
+<script>
+  class Student {
+    constructor(name, number) {
+      this.name = name;
+      this.number = number;
+    }
+    sayHi() {
+      console.log(`姓名：${this.name}，学号: ${this.number}`);
+    }
+  }
+
+  const wukong = new Student("孙悟空", 2);
+  wukong.sayHi();
+
+  const kelin = new Student("克林", 3);
+  kelin.sayHi();
+</script>
