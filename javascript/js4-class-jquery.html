@@ -1,0 +1,62 @@
+<html>
+  <head></head>
+  <body>
+    <p>一段文字1</p>
+    <p>一段文字2</p>
+    <p>一段文字3</p>
+    <script>
+      class jQuery {
+        constructor(selector) {
+          const result = document.querySelectorAll(selector);
+          const length = result.length;
+          for (let i = 0; i < length; i++) {
+            this[i] = result[i];
+          }
+          this.length = length;
+          this.selector = selector;
+        }
+
+        get(index) {
+          return this[index];
+        }
+
+        each(fn) {
+          for (let i = 0; i < this.length; i++) {
+            const element = this[i];
+            fn(element);
+          }
+        }
+        on(type, fn) {
+          return this.each((elem) => {
+            elem.addEventListener(type, fn, false);
+          });
+        }
+
+        // 扩展api
+      }
+
+      /** 插件，把相关属性和方法挂载在原型上，被实例化后就可以实例使用 */
+      jQuery.prototype.dialog = (info) => {
+        alert(info);
+      };
+
+      /** 扩展性 */
+      class myJQuery extends jQuery {
+        constructor(selector) {
+          super(selector);
+        }
+
+        // 扩展自己的方法
+        addClass(className) {
+          this.each((elem) => {
+            const classNames = elem.getAttribute("class");
+            const newClassNames = classNames
+              ? `${classNames} ${className}`
+              : className;
+            elem.setAttribute("class", newClassNames);
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

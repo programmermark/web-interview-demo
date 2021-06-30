@@ -1,0 +1,60 @@
+<script>
+  // 在函数中的this
+  function fn1() {
+    console.log(this); // this指定的全局环境，window
+  }
+
+  fn1();
+
+  // 通过call、apply、bind改变this的指向
+  fn1.call({ x: 100 }); // 输出：{x: 100}
+
+  const fn2 = fn1.bind({ x: 200 });
+  fn2(); // 输出： {x: 200}
+
+  // 在对象中的this
+
+  const zhangsan = {
+    name: "张三",
+    sayHi() {
+      // this就是当前对象zhangsan
+      console.log(this);
+    },
+    wait() {
+      // 这里实际调用的是window.setTimeOut，所以this指向的是window
+      setTimeout(function () {
+        // this === window
+        console.log(this);
+      }, 200);
+    },
+  };
+
+  const lisi = {
+    name: "李四",
+    sayHi() {
+      // this就是当前对象lisi
+      console.log(this);
+    },
+    wait() {
+      // 箭头函数中没有this，它会取上级作用域中的this，所以this为lisi
+      setTimeout(() => {
+        // this === lisi
+        console.log(this);
+      }, 200);
+    },
+  };
+
+  // class中的this
+  // class中的this指向的是class实例化后的对象
+  class People {
+    constructor(name) {
+      this.name = name;
+    }
+    sayHi() {
+      console.log(this);
+    }
+  }
+
+  const people1 = new People("王麻子");
+  people1.sayHi(); // 输出就是people1这个对象
+</script>
