@@ -1,0 +1,18 @@
+<script>
+  function createCache() {
+    const data = {}; // 闭包中的数据，被隐藏，外界无法访问
+
+    return {
+      set(key, val) {
+        data[key] = val;
+      },
+      get(key) {
+        return data[key];
+      },
+    };
+  }
+
+  const cache = createCache();
+  cache.set("a", 100);
+  console.log("a", cache.get("a"));
+</script>

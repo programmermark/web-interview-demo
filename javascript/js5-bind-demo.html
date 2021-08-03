@@ -1,1 +1,54 @@
-<script></script>
+<script>
+  function fn1(a, b) {
+    console.log("this", this);
+    console.log(a, b);
+    console.log("function name fn1");
+  }
+
+  const fn2 = fn1.bind({ name: "张三" }, 100, 200);
+
+  // 模拟bind
+
+  Function.prototype.bind1 = function () {
+    // 把参数拆解成数组
+    const args = Array.prototype.slice.call(arguments);
+    // 获取this（数组第一项）
+    const t = args.shift();
+
+    // self代指调用bind1的函数本身
+    const self = this;
+
+    return function () {
+      return self.apply(t, args);
+    };
+  };
+
+  // 模拟call
+  Function.prototype.call1 = function () {
+    // 把参数拆解成数组
+    const args = Array.prototype.slice.call(arguments);
+    // 获取this，参数数组的第一项
+    const t = args.shift();
+    // self代指调用call1的函数本身
+    const self = this;
+
+    return self.apply(t, args);
+  };
+
+  // 模拟apply
+  Function.prototype.apply1 = function () {
+    // 把参数拆解成数组
+    const args = Array.prototype.slice.call(arguments);
+    // 获取this,参数数组的第一项
+    const t = args[0];
+    // self代指调用apply1的函数本身
+    const self = this;
+    return self.call(t, ...args[1]);
+  };
+
+  const fn3 = fn1.bind1({ name: "张三" }, 100, 200);
+  console.log(fn2());
+  console.log(fn3());
+  fn1.call1({ name: "张三" }, 100, 200);
+  fn1.apply1({ name: "张三" }, [100, 200]);
+</script>
