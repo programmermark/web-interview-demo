@@ -4,6 +4,17 @@
 2. 什么是宏任务和微任务，两者有什么区别？
 3. promise 有哪三种状态？如何变化？
 
+pending(进行中) resolved(成功) rejected(失败)
+pending => resolved
+pending => rejected
+
+pending 状态，不会触发 then 和 catch；
+resolved 状态，会触发 then 回调函数；
+rejected 状态，会触发 catch 回调函数；
+
+then 正常返回 resolved，出现异常返回 rejected;
+catch 正常返回 resolved，出现异常返回 rejected;
+
 4. promise then 和 catch 的连接
 5. async/await 的语法
 6. promise 和 setTimeOut 顺序问题
