@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>进度统计</title>
+    <style>
+      .toast-wrapper {
+        position: fixed;
+        width: 100%;
+        top: 20px;
+      }
+      .toast {
+        padding: 20px;
+        color: white;
+        background: #ff0062;
+        border-radius: 10px;
+        box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      .animation {
+        opacity: 0;
+        animation: fade 4s ease;
+      }
+
+      @keyframes fade {
+        0% {
+          opacity: 0;
+        }
+        12.5% {
+          opacity: 0.5;
+        }
+        25% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 1;
+        }
+        75% {
+          opacity: 1;
+        }
+        87.5% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="toast-wrapper">
+        <div class="toast animation"></div>
+      </div>
+    </div>
+
+    <script>
+      const course = {
+        all: 89 /** 课程总节数 */,
+        hasLearned: 17 /** 初始化的已学习的节数 */,
+        todayTarget: 5 /** 今日需要完成的课程节数目标 */,
+        todayComplete: 0 /** 今日已学习完成课程节数 */,
+      };
+
+      /**
+       * 完成状态包括：
+       *  1: 未开始（'not started'）
+       *  2: 部分完成（'part complete'）
+       *  3. 已完成（'complete'）
+       *  4. 超额完成（'overComplete'）
+       */
+      const learnHistory = [
+        {
+          date: "2021-07-06",
+          todayTarget: 5,
+          todayComplete: 0,
+          complete: "unfinished",
+        },
+      ];
+
+      function getTodayDate() {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        let monthStr = month === 0 || month >= 10 ? month : `0${month}`;
+        let dayStr = day === 0 || day >= 10 ? day : `0${day}`;
+        return `${year}-${monthStr}-${dayStr}`;
+      }
+
+      function countCompleteStatus() {
+        const historyCount = learnHistory
+          .map((item) => item.todayComplete)
+          .reduce(
+            (initCount, countItem) => initCount + countItem.todayComplete
+          );
+        const totalProgress =
+          (((course.hasLearned + historyCount) / course.all) * 100).toFixed(2) +
+          "%";
+        let todayProgress = 0;
+        const todayDate = getTodayDate();
+        const dateFindResult = learnHistory.find(
+          (item) => item.date === todayDate
+        );
+        if (dateFindResult) {
+          todayProgress =
+            (dateFindResult.todayComplete / dateFindResult.todayTarget).toFixed(
+              2
+            ) + "%";
+        } else {
+          todayProgress = todayProgress.toFixed(2) + "%";
+        }
+        return {
+          allTarget: course.all,
+          totalProgress,
+          todayTarget: dateFindResult ? dateFindResult.todayTarget : 0,
+          todayProgress,
+        };
+      }
+
+      function toast() {
+        const { allTarget, totalProgress, todayTarget, todayProgress } =
+          countCompleteStatus();
+        const totalProgressDesc = `目标课程总共${allTarget}节，目前学习总进度：${totalProgress}；`;
+        const todayProgressDesc = `今日需要学习的课程共${todayTarget}节, 今天学习进度：${todayProgress}；`;
+        const elem = document.querySelector(".toast-wrapper .toast");
+        elem.textContent = totalProgressDesc + todayProgressDesc;
+      }
+      toast();
+    </script>
+  </body>
+</html>
