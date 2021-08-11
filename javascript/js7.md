@@ -28,6 +28,32 @@ catch 正常返回 resolved，出现异常返回 rejected;
 
 ##### 二、promise 进阶
 
+> 一个 Promise 必然处于以下三种状态之一：pending(待定)、fulfilled(已兑现)、rejected(已拒绝)；
+> 一个 Promise 的状态变化只会有如下两种：pending => fulfilled 或者 pending => rejected，状态一旦发生变更就不可逆；状态 fulfilled(已兑现)和 rejected(已拒绝)又被统称为 resolved(已决议)，表示 promise 状态已确定并且不可变更。
+
 ##### 三、async/await
+
+> async 关键字声明的函数会返回一个 promise 对象;
+> await 关键字只能在有 async 关键字声明的函数内部使用，await 下方的代码相当于被包裹在一个 then()方法的内部；
+
+使用示例：
+
+```
+  // fn1调用后返回一个promise对象
+  const fn1 = async function() {
+    return 'fn1';
+  };
+
+  const fn2 = async function() {
+    const result = await fn1();
+    console.log('result', result);
+  }
+  console.log('fn2', fn2());
+
+  // 输出结果： fn2 Promise {<pending>}
+  // 输出结果：result fn2
+```
+
+根据上面的例子可以看出：async 关键字声明的函数 fn2 返回的也是一个 promise 对象，在 fn2 调用完毕后再调用异步的 fn1 输出'fn1'.
 
 ##### 四、微任务/宏任务

@@ -1,0 +1,13 @@
+<script>
+  async function fn1() {
+    console.log(1000);
+    return 1000;
+  }
+
+  async function fn2() {
+    const value = await fn1();
+    console.log("value", value);
+    return value;
+  }
+  console.log("res", fn2());
+</script>
