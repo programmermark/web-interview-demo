@@ -1,0 +1,58 @@
+<script>
+  // resolved状态的promise会被then方法捕获，rejected状态的promise会被catch方法捕获；
+  // then()方法正常返回resolved状态的promise，有错误返回rejected状态的promise，供后续的then()或者catch()方法调用；
+  // catch()方法正常返回resolved状态的promise，有错误返回rejected状态的promise，供后续的then()或者catch()方法调用；
+
+  // 第一题
+  const p1 = Promise.resolve()
+    .then(() => {
+      console.log("a1"); // 'a1'
+      throw new Error("error1");
+    })
+    .catch(() => {
+      console.log("a2");
+    })
+    .then(() => {
+      console.log("a3"); // 'a3'
+    });
+
+  console.log("p1", p1);
+
+  // 第二题
+  Promise.resolve()
+    .then(() => {
+      console.log("b1"); // 'b1'
+      throw new Error("error1");
+    })
+    .catch(() => {
+      console.log("b2"); // 'b2'
+    })
+    .then(() => {
+      console.log("b3"); // 'b3'
+    });
+
+  // 第三题
+  Promise.resolve()
+    .then(() => {
+      console.log("c1"); // 'c1'
+      throw new Error("error2");
+    })
+    .catch(() => {
+      console.log("c2"); // 'c2'
+    })
+    .catch(() => {
+      console.log("c3");
+    });
+
+  const p4 = new Promise((resolve, reject) => {
+    resolve(new Error());
+  })
+    .then((value) => {
+      console.log("d1", value);
+    })
+    .then(() => {
+      console.log("d2");
+      throw new Error();
+    });
+  console.log(p4);
+</script>
