@@ -35,6 +35,7 @@ catch 正常返回 resolved，出现异常返回 rejected;
 
 > async 关键字声明的函数会返回一个 promise 对象;
 > await 关键字只能在有 async 关键字声明的函数内部使用，await 下方的代码相当于被包裹在一个 then()方法的内部；
+> await 相当于 Promise 的 then 方法，所以当 await 后面的代码返回一个 rejected 状态的 Promise 时，await 后的代码不会执行反而会报错（由于 rejected 状态的 promise 本身就会报错，除非被 catch(try catch 或者 catch 方法)）；
 
 使用示例：
 
@@ -57,3 +58,8 @@ catch 正常返回 resolved，出现异常返回 rejected;
 根据上面的例子可以看出：async 关键字声明的函数 fn2 返回的也是一个 promise 对象，在 fn2 调用完毕后再调用异步的 fn1 输出'fn1'.
 
 ##### 四、微任务/宏任务
+
+微任务先于 DOM 渲染触发，宏任务后于 DOM 渲染触发。
+
+宏任务包括：setTimeOut setInterval ajax DOM 时间
+微任务：Promise、async/await
