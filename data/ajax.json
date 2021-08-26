@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "data": {
+    "username": "马克豚",
+    "portrait": "https://image.immortalboy.cn/public/uploads/2020/06/08/1591604672082466.jpeg",
+    "bgImg": "https://image.immortalboy.cn/public/uploads/2020/06/08/1591604676955860.jpg",
+    "qqAccount": "1126765590",
+    "weChatAccount": "a13720141463",
+    "githubUrl": "https://github.com/callmehui",
+    "logoName": "雄心壮志",
+    "logoSub": "专注于前端开发和学习",
+    "articleCount": 17,
+    "talkCount": 18,
+    "novelCount": 1
+  }
+}
