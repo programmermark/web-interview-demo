@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>debounce</title>
+  </head>
+  <body>
+    <input id="input1" />
+
+    <script>
+      const input1Ele = document.getElementById("input1");
+      input1Ele.addEventListener(
+        "keyup",
+        debounce(function () {
+          console.log(input1Ele.value);
+        })
+      );
+
+      function debounce(fn, delay = 400) {
+        let timer = null;
+
+        return function () {
+          /** 在delay的时间内再次触发的话，会清掉定时器重新开始计时，重新调用防抖函数 */
+          if (timer) {
+            clearTimeout(timer);
+          }
+
+          timer = setTimeout(() => {
+            fn.apply(this, arguments);
+            timer = null;
+          }, delay);
+        };
+      }
+    </script>
+  </body>
+</html>
