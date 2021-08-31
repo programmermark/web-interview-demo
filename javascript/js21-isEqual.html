@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>isEqual</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 判断参数是否是对象或者数组
+       */
+      function isObject(obj) {
+        return typeof obj === "object" && obj !== null;
+      }
+
+      function isEqual(obj1, obj2) {
+        // 除非两者都是对象，否则直接进行比较
+        if (!isObject(obj1) || !isObject(obj2)) {
+          return obj1 === obj2;
+        }
+        // 如果两个对象指向的是同一块内存，直接返回true
+        if (obj1 === obj2) {
+          return true;
+        }
+        // 两个都是对象或者数字，而且不相等
+        const obj1Keys = Object.keys(obj1);
+        const obj2Keys = Object.keys(obj2);
+        if (obj1Keys.length !== obj2Keys.length) {
+          return false;
+        }
+        for (const key in obj1) {
+          const res = isEqual(obj1[key], obj2[key]);
+          if (!res) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      const obj1 = {
+        a: 1,
+        b: 2,
+        c: {
+          b: 100,
+        },
+      };
+
+      const obj2 = {
+        a: 1,
+        b: 2,
+        c: {
+          b: 101,
+        },
+      };
+
+      const obj3 = obj1;
+
+      const obj4 = {
+        a: 1,
+        b: 2,
+        c: {
+          b: 100,
+        },
+      };
+
+      const result = isEqual(obj1, obj4);
+      console.log("result", result);
+    </script>
+  </body>
+</html>
